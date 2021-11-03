@@ -1,5 +1,5 @@
 
---Analysis on Covid Death and Covid Vaccinations
+--Covid Deaths/Vaccinations Analysis
 
 --Let's select data that we are going to use
 
@@ -7,7 +7,7 @@ Select location, date, total_cases, new_cases, total_deaths, population
 From portfolioprojects..Coviddeath
 Order by 1,2
 
---Create a View to look at Nigeria Covid Total_cases vs Total Death as of October 2021
+--Create a View to look at Nigeria's Covid Total_cases vs Total Death as of October 2021
 
 Create View NigeriaCoviddeathPercentage as
 Select location, date, total_cases, total_deaths, (total_deaths/total_cases)*100 as Deathpercentage
@@ -16,7 +16,7 @@ Where location = 'Nigeria'
 
 
 --Total cases vs population
---Shows what percentage of population got covid
+--Shows what percentage of the population got covid
 
 Create view NigeriaPopulationVsCoviddeath as
 Select location, date, population, total_cases, (total_cases/population)*100 as Percentofpeopleinfected
@@ -25,7 +25,7 @@ Where location = 'Nigeria'
 And continent is not null
 
 
---looking at country with the highest infection rate compared to the population
+--looking at the country with the highest infection rate compared to the population
 
 Create View MostInfectedCountry as
 Select location,population, max(total_cases) as HighestInfectionCount, Max((total_cases/population))*100 as Percentpopulationinfected
@@ -35,8 +35,7 @@ Group by location,population
 --Order by Percentpopulationinfected desc
 
 
---showing the country with highest death count
---Using Cast to convert the data type
+--showing the country with the highest death count
 
 
 Create View HighestdeathCount as
@@ -46,8 +45,6 @@ Where continent is not null
 Group by location
 --Order by TotalDeathCount desc
 
-
---Lets break down by continent
 --showing the continents with the highest death count per population
 
 
@@ -77,13 +74,14 @@ Where continent is not null
 Group by date
 
 
---Joining the two datasets Covidvaccinations
+--Joining the two datasets Covid deaths/vaccinations
 
 Select * 
 	From PortfolioProjects..CovidDeath dea
 	Join PortfolioProjects..CovidVaccinations vac
 		On dea.location = vac.location
 		And dea.date =vac.date
+
 
 --Looking at Total Population vs Vaccinations
 
@@ -132,6 +130,8 @@ where dea.continent is not null)
 --To get the % of people vaccinated by day
 Select * , (peoplevaccinated/population)*100 as Percentage_of_Peoplevaccinated
 From PopvsVac
+
+
 
 --TEMP TABLE
   
