@@ -24,6 +24,16 @@ From portfolioprojects..Coviddeath
 Where location = 'Nigeria'
 And continent is not null
 
+--Africa's Covid death count
+
+Select location,max(cast(total_deaths as int)) as TotalDeathCount
+From portfolioprojects..Coviddeath
+Where continent is not null
+and continent = 'Africa'
+Group by location
+Order by TotalDeathCount desc
+
+
 
 --looking at the country with the highest infection rate compared to the population
 
