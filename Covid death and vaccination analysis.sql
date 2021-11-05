@@ -49,11 +49,12 @@ Group by location
 
 
 Create View ContinentwiththeHighestdeathCount as
-Select continent,max(cast(total_deaths as int)) as TotalDeathCount
+Select location,max(cast(total_deaths as int)) as TotalDeathCount
 From portfolioprojects..Coviddeath
-Where continent is not null
-Group by continent
---Order by TotalDeathCount desc
+where continent is null
+Group by location
+Order by TotalDeathCount desc
+
 
 
 --World total Covid Death Percentage
